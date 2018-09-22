@@ -1,3 +1,5 @@
+#Author: Davis Cook
+
 #This will define the Stock class :
 #A stock has a name which is a String
 #A Symbol which is a String
