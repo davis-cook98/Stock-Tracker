@@ -5,20 +5,12 @@
 from bs4 import BeautifulSoup
 import requests
 import re
-<<<<<<< HEAD
 
-=======
-import json
->>>>>>> ab66a776607e704dfd8b698d481a15d4b93e9ef2
 
 with requests.Session() as c:
 
       #Asks user for nasdaq symbol and appends it to url for data extraction
-<<<<<<< HEAD
-      nasdaq_symbol = input("What stock symbol?\n")
-=======
       nasdaq_symbol = input("What stock symbol?\n").lower()
->>>>>>> ab66a776607e704dfd8b698d481a15d4b93e9ef2
       nasdaq_baseurl = 'https://www.nasdaq.com/symbol/'
       nasdaq_url = nasdaq_baseurl.__add__(nasdaq_symbol)
 
