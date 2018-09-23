@@ -10,7 +10,7 @@ import json
 with requests.Session() as c:
 
       #Asks user for nasdaq symbol and appends it to url for data extraction
-      nasdaq_symbol = input("What stock symbol?\n")
+      nasdaq_symbol = input("What stock symbol?\n").lower()
       nasdaq_baseurl = 'https://www.nasdaq.com/symbol/'
       nasdaq_url = nasdaq_baseurl.__add__(nasdaq_symbol)
 
