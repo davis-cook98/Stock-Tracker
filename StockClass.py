@@ -7,28 +7,15 @@
 
 class Stock:
     #Defines the fields for a Stock
-    def _init_(self, Name, Symbol, Price, nChange):
-        self._Name = Name
-        self._Symbol = Symbol
-        self._Price = Price
-        self._nChange = nChange
+    def __init__(self, Name, Symbol, Price, nChange):
+        self.name = Name
+        self.symbol = Symbol
+        self.price = Price
+        self.change = nChange
 
-    #Returns the stock's name
-    def getName(self):
-        return self._name
+    def __str__(self):
+        return ', '.join(['{key}={value}'.format(key=key, value=self.__dict__.get(key)) for key in self.__dict__]
 
-    #Returns the stock's symbol
-    def getSymbol(self):
-        return self._Symbol
+X = Stock(Name="Apple", Symbol="AAPL", Price=203.77 nChange=1.03)
 
-    #Returns the stock's price
-    def getPrice(self):
-        return self._Price
-
-    #Returns the net change of the stock
-    def getnChange(self):
-        return self._nChange
-
-    #Prints the stock's name followed by the price
-    def Ticker(self):
-        print(Name + "'s current price is: " + str(self._price))
+print(X)
