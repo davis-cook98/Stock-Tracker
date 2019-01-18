@@ -1,46 +1,32 @@
-#Author Ajay Shah
+# Authors: Ajay Shah and Davis Cook
 
-
-#Some imports for fetch data via http
+# Some imports for fetch data via http
 from bs4 import BeautifulSoup
 import requests
 import re
+from StockClass import Stock
 
 
-with requests.Session() as c:
-
-      #Asks user for nasdaq symbol and appends it to url for data extraction
-      nasdaq_symbol = input("What stock symbol?\n").lower()
+def GetStock(symbol):
       nasdaq_baseurl = 'https://www.nasdaq.com/symbol/'
-      nasdaq_url = nasdaq_baseurl.__add__(nasdaq_symbol)
+      nasdaq_url = nasdaq_baseurl.__add__(symbol)
 
-      #GET requesting nasdaq website for extraction of data
-      url_fetch = c.get(nasdaq_url)
+      # Get requesting nasdaq website for extraction of data
+      url_fetch = requests.get(nasdaq_url)
       soup = BeautifulSoup(url_fetch.text, 'html.parser')
 
-      #Extracting Stock Name
+      # Extracting Stock Name
       stock_variable_name = re.compile("var followObjTitle = \"(.*?)\";")
       stock_name = str(stock_variable_name.findall(soup.text))[2:-2]
-      print("\nStock Name: ", stock_name)
 
-      #Extracting Stock Price
+      # Extracting Stock Price
       stock_price = soup.find('div',{'class':'qwidget-dollar'}).text
-      print("Last Sale Price: ", stock_price)
 
-      #Extracting Stock Netchange
-      stock_netchange = soup.find('div',{'id':'qwidget_netchange'}).text
+      # Making a "Stock" from the scraped data
+      out = Stock(stock_name, symbol.upper(), stock_price)
 
-      #Checking whether the netchange trend is upward or downward
-      determine_netchange_trend = soup.select('div[id="qwidget_netchange"]')[0]['class']
-      downward_trend = "['qwidget-cents', 'qwidget-Red']"
-      upward_trend = "['qwidget-cents', 'qwidget-Green']"
+      print(out)
+      return(out)
 
-
-      if str(determine_netchange_trend) == downward_trend:
-          print("Net Change: ", stock_netchange, "points Down")
-
-      elif str(determine_netchange_trend) == upward_trend:
-          print("Net Change: ", stock_netchange, "points Up")
-
-      else:
-          print("Net Change: N/A")
+# Test
+# GetStock(input("What stock symbol?\n"))

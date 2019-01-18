@@ -2,7 +2,7 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-#used to communicate with Google Sheets
+#Used to communicate with Google Sheets
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
